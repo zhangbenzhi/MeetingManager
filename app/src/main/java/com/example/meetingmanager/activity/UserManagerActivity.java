@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,14 +13,13 @@ import com.example.meetingmanager.R;
 import com.example.meetingmanager.bean.UserBean;
 import com.example.meetingmanager.greendao.UserBeanDao;
 
-import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LoginActivity extends AppCompatActivity {
+public class UserManagerActivity extends AppCompatActivity {
 
     @BindView(R.id.et_username)
     EditText etUsername;
@@ -31,24 +29,24 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_user_manager);
         ButterKnife.bind(this);
-        setTitle("登录");
+        setTitle("用户管理");
+
+        etUsername.setText(MyApplication.userBean.userName);
+        etPassword.setText(MyApplication.userBean.password);
     }
 
-    @OnClick({R.id.login, R.id.register})
+    @OnClick({R.id.update})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.login:
-                login();
-                break;
-            case R.id.register:
-                startActivity(new Intent(this, RegisterActivity.class));
+            case R.id.update:
+                update();
                 break;
         }
     }
 
-    private void login() {
+    private void update() {
         String strName = etUsername.getText().toString();
         String strPass = etPassword.getText().toString();
         if (TextUtils.isEmpty(strName)) {
@@ -61,18 +59,19 @@ public class LoginActivity extends AppCompatActivity {
         }
         UserBeanDao userBeanDao = MyApplication.getMyApplication().getDaoSession().getUserBeanDao();
         List<UserBean> list = userBeanDao.queryBuilder()
-                .where(UserBeanDao.Properties.UserName.eq(strName), UserBeanDao.Properties.Password.eq(strPass))
+                .where(UserBeanDao.Properties.UserName.eq(strName))
                 .list();
-        if (list == null || list.size() == 0) {
-            Toast.makeText(this, "该用户不存在", Toast.LENGTH_SHORT).show();
+        if (list != null && list.size() > 0) {
+            Toast.makeText(this, "该用户名已存在，请修改", Toast.LENGTH_SHORT).show();
             return;
         }
-        Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-        //登录成功
-        MyApplication.userBean = list.get(0);
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
+        MyApplication.userBean.userName = strName;
+        MyApplication.userBean.password = strPass;
+        try {
+            userBeanDao.update(MyApplication.userBean);
+            Toast.makeText(this, "修改用户信息成功", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
-
 }

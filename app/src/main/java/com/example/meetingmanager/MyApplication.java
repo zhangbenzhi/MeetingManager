@@ -3,6 +3,7 @@ package com.example.meetingmanager;
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.meetingmanager.bean.UserBean;
 import com.example.meetingmanager.greendao.DaoMaster;
 import com.example.meetingmanager.greendao.DaoSession;
 
@@ -10,6 +11,7 @@ public class MyApplication extends Application {
 
     private DaoSession daoSession;
     private static MyApplication myApplication;
+    public static UserBean userBean;
 
     @Override
     public void onCreate() {
