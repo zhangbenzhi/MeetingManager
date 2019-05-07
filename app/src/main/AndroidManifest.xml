@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.SystemActivity"></activity>
+        <activity android:name=".activity.MeetingDetailActivity"></activity>
+        <activity android:name=".activity.SystemActivity" />
         <activity android:name=".activity.EquipmentActivity" />
         <activity android:name=".activity.UserManagerActivity" />
         <activity android:name=".activity.OrderActivity" />
@@ -24,6 +25,7 @@
         </activity>
         <activity android:name=".activity.SplashActivity" />
         <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.AddOrderActivity" />
     </application>
 
 </manifest>
