@@ -27,6 +27,13 @@
         android:text="用户信息" />
 
     <Button
+        android:id="@+id/meeting_shenpi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="会议审批" />
+
+    <Button
         android:id="@+id/equipment_manager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

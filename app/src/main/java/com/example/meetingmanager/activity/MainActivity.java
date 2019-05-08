@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnEquipmentManager;
     @BindView(R.id.system_manager)
     Button btnSystemManager;
+    @BindView(R.id.meeting_shenpi)
+    Button btnMeetingShenpi;
 
 
     @Override
@@ -37,19 +39,21 @@ public class MainActivity extends AppCompatActivity {
             case 0:
                 btnOrder.setVisibility(View.VISIBLE);
                 btnUserInfo.setVisibility(View.VISIBLE);
+                btnMeetingShenpi.setVisibility(View.GONE);
                 btnEquipmentManager.setVisibility(View.GONE);
                 btnSystemManager.setVisibility(View.GONE);
                 break;
             case 1:
                 btnOrder.setVisibility(View.GONE);
                 btnUserInfo.setVisibility(View.GONE);
+                btnMeetingShenpi.setVisibility(View.VISIBLE);
                 btnEquipmentManager.setVisibility(View.VISIBLE);
                 btnSystemManager.setVisibility(View.VISIBLE);
                 break;
         }
     }
 
-    @OnClick({R.id.order, R.id.user_info, R.id.equipment_manager, R.id.system_manager})
+    @OnClick({R.id.order, R.id.user_info, R.id.equipment_manager, R.id.system_manager, R.id.meeting_shenpi})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.order:
@@ -63,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.system_manager:
                 startActivity(new Intent(this, SystemActivity.class));
+                break;
+            case R.id.meeting_shenpi:
+
                 break;
         }
     }

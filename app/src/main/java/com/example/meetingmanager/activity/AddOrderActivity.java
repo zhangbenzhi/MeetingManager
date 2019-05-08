@@ -86,6 +86,7 @@ public class AddOrderActivity extends AppCompatActivity {
                 meetingBean.mettingName = meetname.getText().toString();
                 meetingBean.mettingRoomId = selectedBean.id;
                 MyApplication.getMyApplication().getDaoSession().getMeetingBeanDao().insert(meetingBean);
+                Toast.makeText(this, "预约会议成功，请等待管理员审核", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

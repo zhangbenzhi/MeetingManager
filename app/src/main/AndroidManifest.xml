@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MeetingDetailActivity"></activity>
+        <activity android:name=".activity.MeetingShenPiActivity"></activity>
+        <activity android:name=".activity.MeetingDetailActivity" />
         <activity android:name=".activity.SystemActivity" />
         <activity android:name=".activity.EquipmentActivity" />
         <activity android:name=".activity.UserManagerActivity" />
