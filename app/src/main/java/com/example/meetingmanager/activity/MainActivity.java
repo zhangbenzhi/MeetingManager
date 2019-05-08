@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(this, SystemActivity.class));
                 break;
             case R.id.meeting_shenpi:
-
+                startActivity(new Intent(this, MeetingShenPiActivity.class));
                 break;
         }
     }
