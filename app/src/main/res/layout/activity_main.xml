@@ -47,6 +47,19 @@
         android:layout_margin="16dp"
         android:text="系统管理" />
 
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/colorPrimary"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="退出登录"
+        android:textColor="#ffffff"
+        android:textSize="16dp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"

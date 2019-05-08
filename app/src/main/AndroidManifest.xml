@@ -27,6 +27,8 @@
         <activity android:name=".activity.SplashActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.AddOrderActivity" />
+        <activity android:name=".activity.EquipmentDetailActivity" />
+        <activity android:name=".activity.AddEquipmentActivity" />
     </application>
 
 </manifest>

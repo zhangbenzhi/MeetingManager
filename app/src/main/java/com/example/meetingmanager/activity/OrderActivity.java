@@ -3,6 +3,7 @@ package com.example.meetingmanager.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -58,6 +59,7 @@ public class OrderActivity extends AppCompatActivity {
         recyclerView.setVisibility(View.VISIBLE);
         MeetingAdapter meetingAdapter = new MeetingAdapter(this);
         recyclerView.setAdapter(meetingAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         meetingAdapter.setData(list);
     }
 

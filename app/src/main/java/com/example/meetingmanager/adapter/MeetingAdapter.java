@@ -34,11 +34,13 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
     @Override
     public void onBindViewHolder(@NonNull MeetingViewHolder meetingViewHolder, int i) {
         MeetingBean meetingBean = meetingBeans.get(i);
-        meetingViewHolder.name.setText(meetingBean.getMettingName());
+        meetingViewHolder.name.setText("会议名称：" + meetingBean.getMettingName());
         meetingViewHolder.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.startActivity(new Intent(activity, MeetingDetailActivity.class));
+                Intent intent = new Intent(activity, MeetingDetailActivity.class);
+                intent.putExtra("meet", meetingBean);
+                activity.startActivity(intent);
             }
         });
     }

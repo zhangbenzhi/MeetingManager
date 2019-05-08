@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.meetingmanager.MyApplication;
 import com.example.meetingmanager.R;
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnSystemManager;
     @BindView(R.id.meeting_shenpi)
     Button btnMeetingShenpi;
+    @BindView(R.id.logout)
+    Button logout;
 
 
     @Override
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick({R.id.order, R.id.user_info, R.id.equipment_manager, R.id.system_manager, R.id.meeting_shenpi})
+    @OnClick({R.id.order, R.id.user_info, R.id.equipment_manager, R.id.system_manager, R.id.meeting_shenpi, R.id.logout})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.order:
@@ -70,6 +73,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.meeting_shenpi:
                 startActivity(new Intent(this, MeetingShenPiActivity.class));
+                break;
+            case R.id.logout:
+                MyApplication.userBean = null;
+                Toast.makeText(this, "退出登录成功", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
                 break;
         }
     }

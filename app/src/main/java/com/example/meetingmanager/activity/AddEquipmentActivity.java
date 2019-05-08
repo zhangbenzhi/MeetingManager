@@ -2,19 +2,18 @@ package com.example.meetingmanager.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.meetingmanager.MyApplication;
 import com.example.meetingmanager.R;
+import com.example.meetingmanager.bean.EquipmentBean;
 import com.example.meetingmanager.bean.MeetingBean;
 import com.example.meetingmanager.bean.MeetingRoomBean;
 
@@ -25,12 +24,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AddOrderActivity extends AppCompatActivity {
+public class AddEquipmentActivity extends AppCompatActivity {
 
     @BindView(R.id.order_meeting)
     Button order;
-    @BindView(R.id.et_username)
-    EditText username;
     @BindView(R.id.et_meetname)
     EditText meetname;
     @BindView(R.id.spinner)
@@ -40,13 +37,14 @@ public class AddOrderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_order);
+        setContentView(R.layout.activity_add_equipment);
         ButterKnife.bind(this);
-        setTitle("预定会议");
+        setTitle("添加设备");
 
         //获取会议室
         List<MeetingRoomBean> meetingRoomBeans = MyApplication.getMyApplication().getDaoSession().getMeetingRoomBeanDao().loadAll();
         List<String> str = new ArrayList<>();
+        str.add("仓库");
         if (meetingRoomBeans != null && meetingRoomBeans.size() > 0) {
             for (MeetingRoomBean meetingRoomBean : meetingRoomBeans) {
                 str.add(meetingRoomBean.name);
@@ -56,7 +54,11 @@ public class AddOrderActivity extends AppCompatActivity {
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
-                    selectedBean = meetingRoomBeans.get(pos);
+                    if (pos == 0) {
+                        selectedBean = null;
+                    } else {
+                        selectedBean = meetingRoomBeans.get(pos - 1);
+                    }
                 }
 
                 @Override
@@ -73,21 +75,18 @@ public class AddOrderActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.order_meeting:
                 if (TextUtils.isEmpty(meetname.getText().toString())) {
-                    Toast.makeText(this, "请输入会议名称", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "请输入设备名称", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (TextUtils.isEmpty(username.getText().toString())) {
-                    Toast.makeText(this, "请输入与会者名字", Toast.LENGTH_SHORT).show();
-                    return;
+                EquipmentBean equipmentBean = new EquipmentBean();
+                equipmentBean.name = meetname.getText().toString();
+                if (selectedBean == null) {
+                    equipmentBean.meetingRoomId = 0L;
+                } else {
+                    equipmentBean.meetingRoomId = selectedBean.id;
                 }
-                MeetingBean meetingBean = new MeetingBean();
-                meetingBean.isOk = false;
-                meetingBean.userId = MyApplication.userBean.id;
-                meetingBean.joinerName = username.getText().toString();
-                meetingBean.mettingName = meetname.getText().toString();
-                meetingBean.mettingRoomId = selectedBean.id;
-                MyApplication.getMyApplication().getDaoSession().getMeetingBeanDao().insert(meetingBean);
-                Toast.makeText(this, "预约会议成功，请等待管理员审核", Toast.LENGTH_SHORT).show();
+                MyApplication.getMyApplication().getDaoSession().getEquipmentBeanDao().insert(equipmentBean);
+                Toast.makeText(this, "设备添加成功", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

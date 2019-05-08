@@ -10,17 +10,32 @@
         android:layout_height="70dp"
         android:layout_centerVertical="true"
         android:layout_marginLeft="16dp"
-        android:textSize="16dp"
         android:gravity="center_vertical"
-        android:text="会议名称" />
+        android:text="用户名称"
+        android:textSize="16dp" />
 
-    <Button
-        android:id="@+id/btn_shenpi"
+    <RadioGroup
+        android:id="@+id/rg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
         android:layout_marginRight="16dp"
-        android:text="审批通过" />
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="普通用户" />
+
+        <RadioButton
+            android:id="@+id/rb02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="管理员" />
+
+
+    </RadioGroup>
 
 </RelativeLayout>

@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 .where(UserBeanDao.Properties.UserName.eq(strName), UserBeanDao.Properties.Password.eq(strPass))
                 .list();
         if (list == null || list.size() == 0) {
-            Toast.makeText(this, "该用户不存在", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
             return;
         }
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();

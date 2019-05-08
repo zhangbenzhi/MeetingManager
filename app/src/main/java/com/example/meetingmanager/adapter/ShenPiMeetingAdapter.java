@@ -9,9 +9,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.meetingmanager.MyApplication;
 import com.example.meetingmanager.R;
 import com.example.meetingmanager.activity.MeetingDetailActivity;
 import com.example.meetingmanager.bean.MeetingBean;
+import com.example.meetingmanager.bean.MeetingRoomBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,7 @@ public class ShenPiMeetingAdapter extends RecyclerView.Adapter<ShenPiMeetingAdap
 
     private List<MeetingBean> meetingBeans = new ArrayList<>();
     private Activity activity;
+    private OnItemClickListener onItemClickListener;
 
     public ShenPiMeetingAdapter(Activity activity) {
         this.activity = activity;
@@ -37,13 +40,16 @@ public class ShenPiMeetingAdapter extends RecyclerView.Adapter<ShenPiMeetingAdap
     @Override
     public void onBindViewHolder(@NonNull MeetingViewHolder meetingViewHolder, int i) {
         MeetingBean meetingBean = meetingBeans.get(i);
-        meetingViewHolder.name.setText(meetingBean.getMettingName());
+        meetingViewHolder.name.setText("会议名称：" + meetingBean.getMettingName());
         meetingViewHolder.btnShenpi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 meetingBean.setIsOk(true);
                 meetingBeans.remove(i);
                 notifyDataSetChanged();
+                if (onItemClickListener != null) {
+                    onItemClickListener.onClick(meetingBean);
+                }
             }
         });
     }
@@ -73,5 +79,13 @@ public class ShenPiMeetingAdapter extends RecyclerView.Adapter<ShenPiMeetingAdap
             item = itemView.findViewById(R.id.item);
             btnShenpi = itemView.findViewById(R.id.btn_shenpi);
         }
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public static interface OnItemClickListener {
+        void onClick(MeetingBean meetingBean);
     }
 }

@@ -17,10 +17,12 @@ public class EquipmentBean implements Serializable {
     @Id(autoincrement = true)
     public Long id;
     public String name;
-    @Generated(hash = 787400167)
-    public EquipmentBean(Long id, String name) {
+    public Long meetingRoomId;
+    @Generated(hash = 2125210373)
+    public EquipmentBean(Long id, String name, Long meetingRoomId) {
         this.id = id;
         this.name = name;
+        this.meetingRoomId = meetingRoomId;
     }
     @Generated(hash = 1113208600)
     public EquipmentBean() {
@@ -36,6 +38,12 @@ public class EquipmentBean implements Serializable {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public Long getMeetingRoomId() {
+        return this.meetingRoomId;
+    }
+    public void setMeetingRoomId(Long meetingRoomId) {
+        this.meetingRoomId = meetingRoomId;
     }
 
 }

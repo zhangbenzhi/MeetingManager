@@ -2,9 +2,11 @@ package com.example.meetingmanager.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.meetingmanager.MyApplication;
 import com.example.meetingmanager.R;
@@ -44,13 +46,23 @@ public class MeetingShenPiActivity extends AppCompatActivity {
             alert.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
             return;
-        } else {
-            alert.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
         }
+        alert.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
         ShenPiMeetingAdapter shenPiMeetingAdapter = new ShenPiMeetingAdapter(this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(shenPiMeetingAdapter);
         shenPiMeetingAdapter.setData(list);
 
+        shenPiMeetingAdapter.setOnItemClickListener(new ShenPiMeetingAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(MeetingBean meetingBean) {
+                if (shenPiMeetingAdapter.getItemCount() == 0) {
+                    alert.setVisibility(View.VISIBLE);
+                }
+                meetingBeanDao.update(meetingBean);
+                Toast.makeText(MeetingShenPiActivity.this, "会议审批成功！", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
