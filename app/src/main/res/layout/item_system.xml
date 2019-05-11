@@ -27,7 +27,7 @@
             android:id="@+id/rb01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="出租车司机" />
+            android:text="普通用户" />
 
         <RadioButton
             android:id="@+id/rb02"

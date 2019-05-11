@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="运营申请" />
+        android:text="预约会议" />
 
     <Button
         android:id="@+id/user_info"
@@ -31,21 +31,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="运营审批" />
+        android:text="会议审批" />
 
     <Button
         android:id="@+id/equipment_manager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="出租车管理" />
+        android:text="设备管理" />
 
     <Button
         android:id="@+id/system_manager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="账号管理" />
+        android:text="系统管理" />
 
     <Button
         android:id="@+id/logout"
